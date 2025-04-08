@@ -6,14 +6,32 @@ import es.iesraprog2425.pruebaes.ui.IEntradaSalida
 class Calculadora(private val ui: IEntradaSalida) {
 
     private fun pedirNumero(msj: String, msjError: String = "Número no válido!"): Double {
-        return ui.pedirDouble(msj) ?: throw InfoCalcException(msjError)
+        var valido = false
+        var entrada: Double = 0.0
+
+        while(!valido){
+            try{
+                entrada = ui.pedirDouble(msj) ?: throw InfoCalcException(msjError)
+                valido = true
+
+            }catch(e: InfoCalcException){
+                ui.mostrarError("${e.message}")
+
+            }
+        }
+
+        return entrada
     }
 
     private fun pedirInfo() = Triple(
         pedirNumero("Introduce el primer número: ", "El primer número no es válido!"),
+
         Operadores.getOperador(ui.pedirInfo("Introduce el operador (+, -, *, /): ").firstOrNull())
             ?: throw InfoCalcException("El operador no es válido!"),
+
         pedirNumero("Introduce el segundo número: ", "El segundo número no es válido!"))
+
+
 
     private fun realizarCalculo(numero1: Double, operador: Operadores, numero2: Double) =
         when (operador) {

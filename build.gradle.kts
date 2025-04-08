@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.21"
+    
 }
 
 group = "es.prog2425.pruebacalc"
