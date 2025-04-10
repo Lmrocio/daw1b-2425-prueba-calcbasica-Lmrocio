@@ -1,7 +1,10 @@
 package es.iesraprog2425.pruebaes
 
 import es.iesraprog2425.pruebaes.app.Calculadora
+import es.iesraprog2425.pruebaes.app.LanzadorApp
+import es.iesraprog2425.pruebaes.app.RegistroOperaciones
 import es.iesraprog2425.pruebaes.ui.Consola
+import es.iesraprog2425.pruebaes.utils.Ficheros
 
 /*
 fun main() {
@@ -27,9 +30,20 @@ fun main() {
 */
 
 
-fun main() {
-    Calculadora(Consola()).iniciar()
+fun main(args: Array<String>) {
+    val consola = Consola()
+    val ficheros = Ficheros(consola)
+    val registro = RegistroOperaciones(consola, ficheros)
+    val lanzador = LanzadorApp(consola, registro)
+
+    if (!args.isEmpty()) {
+        lanzador.lanzar(args)
+    }
+
+    val calculadora = Calculadora(consola)
+    calculadora.iniciar()
 }
+
 
 
 /*
