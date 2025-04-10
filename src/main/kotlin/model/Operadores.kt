@@ -1,5 +1,7 @@
 package es.iesraprog2425.pruebaes.model
 
+import es.iesraprog2425.pruebaes.app.InfoCalcException
+
 enum class Operadores(val simbolos: List<Char>) {
     SUMA(listOf('+')),
     RESTA(listOf('-')),
@@ -7,18 +9,7 @@ enum class Operadores(val simbolos: List<Char>) {
     DIVISION(listOf(':', '/'));
 
     companion object {
-        fun getOperador(operador: Char){
-            var valido = false
-            var operador = SUMA
-
-            while(!valido){
-
-                try{
-
-                } catch(e:)
-            }
-
-        } /*=operador?.let { op -> entries.find { op in it.simbolos } }*/
+        fun getOperador(operador: Char?)=operador?.let { op -> entries.find { op in it.simbolos } }
 
 
 

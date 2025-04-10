@@ -49,7 +49,9 @@ class Calculadora(private val ui: IEntradaSalida) {
                 val resultado = realizarCalculo(numero1, operador, numero2)
                 ui.mostrar("Resultado: %.2f".format(resultado))
             } catch (e: NumberFormatException) {
-                ui.mostrarError(e.message ?: "Se ha producido un error!")
+                ui.mostrarError(e.message ?: "Se ha producido un error de formato numérico.")
+            } catch (e: InfoCalcException) {
+                ui.mostrarError(e.message ?: "Se ha producido un error de entrada.")
             }
         } while (ui.preguntar())
         ui.limpiarPantalla()
